@@ -1,0 +1,35 @@
+{
+  "name"                  : "quest"
+  , "version"               : "0.0.0"
+  , "author"                : "Wilfred Godfrey <w.j.godfrey@gmail.com>"
+  , "description"           : "A browser based gaming engine"
+  , "keywords"              : [
+      "game"
+    , "engine"
+    , "QuestJS"
+    , "multiplayer"
+  ]
+  , "repository"            : {
+      "type"                : "git"
+    , "url"                 : "http://github.com/worldhack/quest.git"
+  }
+  , "scripts": {
+      "start"               : "coffee app.coffee.md"
+    , "watch_quest"         : "coffee --watch --join ./public/javascripts/quest.js --compile ./public/coffeescripts/quest"
+    , "watch_game"          : "coffee --watch --join ./public/javascripts/game.js --compile ./public/coffeescripts/game"
+    , "postinstall"         : "coffee --join ./public/javascripts/quest.js --compile ./public/coffeescripts/quest && coffee --join ./public/javascripts/game.js --compile ./public/coffeescripts/game"
+  }
+  , "main"                  : "app.coffee.md"
+  , "man"                   : [ "./man/foo.1", "./man/foo.2" ]
+  , "license"               : "MIT"
+  , "dependencies"          : {
+      "coffee-script"       : "1.6.x"
+    , "colors"              : "0.6.x"
+    , "stylus"              : "0.37.x"
+    , "ws"                  : "0.4.x"
+    , "express"             : "3.3.x"
+    , "nib"                 : "1.0.x"
+    , "jade"                : "0.35.x"
+  }
+  , "engine"                : "node >= 0.10.15"
+}

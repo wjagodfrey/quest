@@ -1,1 +1,0 @@
-coffee  --compile --watch --output ./public/javascripts/ ./public/coffeescripts
