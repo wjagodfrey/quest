@@ -1,4 +1,4 @@
-## quest.coffee.md
+# QuestJS Foundation
 
 The base file for QuestJS. Creates the engine foundation.
 
