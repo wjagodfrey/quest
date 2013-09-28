@@ -1,5 +1,6 @@
-## Testing Markdown
-This is a test 
+# QuestJS Development Server (NodeJS)
+
+Run `npm install` in the project's root directory to install dependencies 
 
     require "colors"
     express   = require "express"
