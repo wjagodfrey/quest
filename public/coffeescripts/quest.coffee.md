@@ -1,4 +1,5 @@
-# quest.coffee.md
-### The base file for QuestJS. Creates the engine foundation.
+## quest.coffee.md
 
-    console.log 'hi theres'
+The base file for QuestJS. Creates the engine foundation.
+
+    console.log 'hi there'
