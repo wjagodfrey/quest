@@ -8,8 +8,6 @@
     nib       = require 'nib'
     routes    = require './config/routes'
 
-    require './public/javascripts/quest'
-
     env       = process.env.NODE_ENV
     port      = if env is 'production' then 80 else 8000
 

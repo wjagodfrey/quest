@@ -1,10 +1,10 @@
 # QuestJS API Doc
 
-    if !Q
-      Q = {}
+    console.log 2
+
     Q.api = {}
 
-### QuestJS's heirachical **method** structure
+### API
 * *Object recycler*
     * *Get object*
     * *Return object*
@@ -15,9 +15,3 @@
 * *Resource constructor*
 * *Viewport constructor*
 * *Game loop*
-
-### QuestJS's heirachical **object** structure
-* *File system*
-    * *Game instances*
-    * *Resources*
-    * *Viewports*
