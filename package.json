@@ -14,12 +14,10 @@
     , "url"                 : "http://github.com/worldhack/quest.git"
   }
   , "scripts": {
-      "start"               : "coffee app.coffee.md"
-    , "watch_quest"         : "coffee --watch --join ./public/javascripts/quest.js --compile ./public/coffeescripts/quest"
-    , "watch_game"          : "coffee --watch --join ./public/javascripts/game.js --compile ./public/coffeescripts/game"
+      "start"               : "coffee app.coffee"
     , "postinstall"         : "coffee --join ./public/javascripts/quest.js --compile ./public/coffeescripts/quest && coffee --join ./public/javascripts/game.js --compile ./public/coffeescripts/game"
   }
-  , "main"                  : "app.coffee.md"
+  , "main"                  : "app.coffee"
   , "man"                   : [ "./man/foo.1", "./man/foo.2" ]
   , "license"               : "MIT"
   , "dependencies"          : {

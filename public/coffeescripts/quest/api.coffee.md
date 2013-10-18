@@ -1,9 +1,5 @@
 # QuestJS API Doc
 
-    console.log 2
-
-    Q.api = {}
-
 ### API
 * *Object recycler*
     * *Get object*

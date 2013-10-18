@@ -8,8 +8,8 @@ All coffeescript files are literate. View them in the github file viewer or use 
 ### Install
 * Run `npm install` in the project's root directory to install dependencies and compile the coffeescript for the first time
 * Run `npm start` to run the server
-* Run `npm run-script watch_quest` to watch the coffeescript and compile when changes are made to *QuestJS coffee files*
-* Run `npm run-script watch_game` to watch the coffeescript and compile when changes are made to *game coffee files*
+* Run `cake watch:quest` to watch the coffeescript and compile when changes are made to *QuestJS coffee files*
+* Run `cake watch:game` to watch the coffeescript and compile when changes are made to *game coffee files*
 
 ### Dev Notes
 ##### Planned features new to this iteration of QuestJS:
