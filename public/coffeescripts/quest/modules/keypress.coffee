@@ -1,7 +1,6 @@
 ###
   Keypress Module
 ###
-console.log 'yep'
 class Q._.modules.Module_Keypress
   constructor: (keys) ->
 

@@ -9,4 +9,3 @@ class Modules
         Q.util.extend @, new Q._.modules["Module_#{moduleName}"] moduleOptions
       else
         console.error "#{moduleName} does not exist"
-

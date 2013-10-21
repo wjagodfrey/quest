@@ -15,16 +15,23 @@ task 'watch:quest', 'Run a coffeescript compile watch on the Quest coffee files'
 
     # module files
     "#{pref}modules/modules.coffee"
-    "#{pref}modules/global/position.coffee"
-    "#{pref}modules/global/unique.coffee"
-    "#{pref}modules/global/dimensions.coffee"
-    "#{pref}modules/global/velocity.coffee"
-    "#{pref}modules/global/keypress.coffee"
+    "#{pref}modules/unique.coffee"
+    "#{pref}modules/display.coffee"
+    "#{pref}modules/velocity.coffee"
+    "#{pref}modules/keypress.coffee"
+    "#{pref}modules/viewport.coffee"
+    "#{pref}modules/game.coffee"
+    "#{pref}modules/scene.coffee"
+    "#{pref}modules/layer.coffee"
+    "#{pref}modules/entity.coffee"
 
     # quest application files
+    "#{pref}bin/viewports.coffee"
+    "#{pref}bin/games.coffee"
     "#{pref}bin/entities.coffee"
     "#{pref}bin/events.coffee"
     "#{pref}bin/loop.coffee"
+    "#{pref}bin/physics.coffee"
 
   ].join(' ')
 
