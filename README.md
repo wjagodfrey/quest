@@ -18,3 +18,24 @@ All coffeescript files are literate. View them in the github file viewer or use 
 * Quadtree collision detection
 * Collision detection using the separating axis theorem
 * Audio engine
+
+
+#API
+
+### Q.create.viewport(*options*)
+#### Options
+* **id**: *The canvas' id (required)*
+* **width**: *New width for canvas. Defaults to canvas width.*
+* **height**: *New height for canvas. Defaults to canvas height.*
+* **color**: *background color*
+
+
+Used to register a viewport. Returns a promise containing the new quest viewport object.
+    
+    Q.viewport.create
+      id: 'gameCanvas'
+      width: 200
+      height: 100
+      color: '#75c2c2'
+    .then (viewport) ->
+      console.log 'CREATED VIEWPORT>>', viewport

@@ -13,29 +13,33 @@ class Q._.modules.Module_Layer
     options = Q.util.extend defaults, options
 
     if options.id?
-      @._ =
+      @_ =
         type: 'layer'
         entities: {}
-      @.id = options.id
-      @.game = options.game
-      @.scene = options.scene
+      @id = options.id
+      @game = options.game
+      @scene = options.scene
 
     # add entities
-    @.entity =
+    @entity =
       create: (options) =>
         if options?.id?
-          entities = @._.entities
+          entities = @_.entities
           entities[options.id] = {}
-          options.game = @.game
-          options.scene = @.scene
-          options.layer = @
+          options.game = @game
+          options.scene = @scene
+          options.layer = @scene._.layers[@id]
+          options.width = options.width ? options.layer.width
+          options.height = options.height ? options.layer.height
+
           modules =
             Entity: options
             Display: options
+            Events: true
           entities[options.id] = new Modules modules
         { then: (next) -> if entities[options.id] then next(entities[options.id]) }
 
     # draw layer
-    @.draw = (viewport) ->
-      for entityId, entity of @._.entities
+    @draw = (viewport) ->
+      for entityId, entity of @_.entities
         entity.draw?(viewport)

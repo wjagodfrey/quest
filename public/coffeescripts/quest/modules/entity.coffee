@@ -13,17 +13,20 @@ class Q._.modules.Module_Entity
     options = Q.util.extend defaults, options
 
     if options.id?
-      @._ =
+      @_ =
         type: 'entity'
         entities: {}
-      @.id = options.id
-      @.game = options.game
-      @.scene = options.scene
-      @.layer = options.layer
-      @.color = options.color
+        sysId: Q._.entityCount++
+      @id = options.id
+      @game = options.game
+      @scene = options.scene
+      @layer = options.layer
+      @color = options.color
 
     # draw entity
-    @.draw = (viewport) ->
-      Q.physics.apply @
-      viewport.context.fillStyle = @.color
-      viewport.context.fillRect @.pos.x, @.pos.y, @.width, @.height
+    @draw = (viewport) ->
+      Q.physics.apply @layer._.entities[@id]
+      @scene.quadtree.updateEntity @layer._.entities[@id]
+      Q.hits.apply @
+      viewport.context.fillStyle = @color
+      viewport.context.fillRect @pos.x, @pos.y, @width, @height

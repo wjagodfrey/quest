@@ -24,14 +24,16 @@ task 'watch:quest', 'Run a coffeescript compile watch on the Quest coffee files'
     "#{pref}modules/scene.coffee"
     "#{pref}modules/layer.coffee"
     "#{pref}modules/entity.coffee"
+    "#{pref}modules/quadtree.coffee"
+    "#{pref}modules/events.coffee"
 
     # quest application files
-    "#{pref}bin/viewports.coffee"
-    "#{pref}bin/games.coffee"
-    "#{pref}bin/entities.coffee"
-    "#{pref}bin/events.coffee"
-    "#{pref}bin/loop.coffee"
-    "#{pref}bin/physics.coffee"
+    "#{pref}functions/viewports.coffee"
+    "#{pref}functions/games.coffee"
+    "#{pref}functions/events.coffee"
+    "#{pref}functions/loop.coffee"
+    "#{pref}functions/physics.coffee"
+    "#{pref}functions/hits.coffee"
 
   ].join(' ')
 

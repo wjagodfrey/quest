@@ -1,5 +1,5 @@
 ###
-  QuestJS Viewort Constructor
+  Viewport Constructor
 ###
 scope = Q.viewport = {}
 

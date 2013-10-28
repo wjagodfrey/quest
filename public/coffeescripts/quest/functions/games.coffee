@@ -1,5 +1,5 @@
 ###
-  QuestJS Game Constructor
+  Game Constructor
 ###
 scope = Q.game = {}
 
@@ -11,6 +11,7 @@ scope = Q.game = {}
       games[options.id] = {}
       modules =
         Game: options
+        Display: options
       games[options.id] = new Modules modules
     { then: (next) -> next(games[options.id]) }
 

@@ -1,5 +1,5 @@
 ###
-  QuestJS Game Constructor
+  Physics Coordinator
 ###
 scope = Q.physics = {}
 

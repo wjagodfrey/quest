@@ -9,26 +9,30 @@ Q.viewport.create
   id: 'gameCanvas'
   width: 200
   height: 100
-  color: '#75c2c2'
+  # color: '#75c2c2'
 .then (viewport) ->
-  console.log 'CREATED VIEWPORT>>', viewport
+  # console.log 'CREATED VIEWPORT>>', viewport
   Q.game.create
     id: 'techDemo01'
+    width: viewport.width
+    height: viewport.height
   .then (game) ->
-    console.log 'CREATED GAME>>', game
+    # console.log 'CREATED GAME>>', game
     game.scene.create
       id: 'firstScene'
     .then (scene) ->
-      console.log 'CREATED SCENE>>', scene
+      # console.log 'CREATED SCENE>>', scene
       scene.layer.create
         id: 'firstLayer'
       .then (layer) ->
-        console.log 'CREATED LAYER>>', layer
+        # console.log 'CREATED LAYER>>', layer
         layer.entity.create
           id: 'firstEntity'
           width: 10
           height: 10
-          color: '#e27f70'
+          x: viewport.width/2-5
+          y: viewport.height/2-5
+          color: '#000'
           Modules:
             Velocity:
               speed: 1
@@ -46,7 +50,42 @@ Q.viewport.create
                 press: -> box.vel.x += box.speed
                 release: -> box.vel.x -= box.speed
         .then (entity) ->
+          entity.registerEvent 'collision', (e) ->
+
+            console.log e
+
           box = entity
-          console.log 'CREATED ENTITY>>', entity
           viewport.bind(game).then ->
-            Q._.filesys.viewports.gameCanvas.draw()
+            Q._.filesys.viewports.gameCanvas.draw
+
+        layer.entity.create
+          id: 'secondEntity'
+          width: 10
+          height: 10
+          x: 50
+          y: 25
+          color: '#ff0000'
+
+        layer.entity.create
+          id: 'thirdEntity'
+          width: 10
+          height: 10
+          x: 60
+          y: 15
+          color: '#00ff00'
+
+        layer.entity.create
+          id: 'fourthEntity'
+          width: 10
+          height: 10
+          x: 75
+          y: 40
+          color: '#0000ff'
+
+        layer.entity.create
+          id: 'fifthEntity'
+          width: 10
+          height: 10
+          x: 145
+          y: 75
+          color: '#ffff00'
