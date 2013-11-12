@@ -1,7 +1,7 @@
 ###
-  Unique Attribute Module
+  Unique Properties Module
 ###
 
-class Q._.modules.Module_Unique
+class Q._.modules.Module_Properties
   constructor: (options) ->
     Q.util.extend @, options

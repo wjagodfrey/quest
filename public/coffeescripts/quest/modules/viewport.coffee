@@ -28,8 +28,10 @@ class Q._.modules.Module_Viewport
 
     if options.id?
       @id = options.id
-      @canvas = document?.getElementById @id
-      @context = document?.getElementById(@id).getContext '2d'
+      @canvas = document?.getElementById(@id) ? {
+          style:{}
+        }
+      @context = document?.getElementById(@id).getContext('2d') ? undefined
       # if there are height and/or width attributes then use them and set the canvas to use them too. Otherwise use the existing width of the canvas.
       @resize options.width, options.height
       @recolor options.color
@@ -50,10 +52,11 @@ class Q._.modules.Module_Viewport
 
     # clear viewport
     @clear = ->
-      @context.clearRect 0,0,@width,@height
+      @context?.clearRect 0,0,@width,@height
 
     # draw viewport
     @draw = ->
+      @clear()
       for gameId, game of @_.games
         game.draw?(@)
 

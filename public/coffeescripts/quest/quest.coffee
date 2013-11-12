@@ -28,12 +28,14 @@
 ###
 
 if !Q? then Q = {}
+window = this ? {}
 
-if !window?
+if module?.exports?
   module.exports = Q
   Q.onServer = true
 else
   window.Q = Q
+  Q.onServer = false
 
 # system objects
 Q._ =
@@ -51,21 +53,21 @@ do ->
   vendors = ['ms', 'moz', 'webkit', 'o']
 
   for vendor in vendors when not window?.requestAnimationFrame
-      window?.requestAnimationFrame = window?[ vendor + 'RequestAnimationFrame']
-      window?.cancelAnimationFrame = window?[ vendor + 'CancelAnimationFrame']
+    window?.requestAnimationFrame = window?[ vendor + 'RequestAnimationFrame']
+    window?.cancelAnimationFrame = window?[ vendor + 'CancelAnimationFrame']
 
   if not window?.requestAnimationFrame
 
-      window?.requestAnimationFrame = (callback, element) ->
-          now = new Date().getTime()
-          delta = Math.max 0, 16 - (now - old)
-          setTimeout (-> callback(time + delta)), delta
-          old = now + delta
+    window?.requestAnimationFrame = (callback, element) ->
+      now = new Date().getTime()
+      delta = Math.max 0, 16 - (now - old)
+      setTimeout (-> callback(time + delta)), delta
+      old = now + delta
 
   if not window?.cancelAnimationFrame
-      
-      window?.cancelAnimationFrame = (id) ->
-          clearTimeout id
+    
+    window?.cancelAnimationFrame = (id) ->
+      clearTimeout id
 
   # turn off console.log for testing
   # console.log = ->

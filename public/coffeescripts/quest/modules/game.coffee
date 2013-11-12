@@ -5,8 +5,6 @@
 class Q._.modules.Module_Game
   constructor: (options) ->
 
-    Q.util.extend @, new Modules options.Modules
-
     defaults =
       id: undefined
 
@@ -37,8 +35,12 @@ class Q._.modules.Module_Game
           scenes[options.id] = new Modules modules
         { then: (next) -> if scenes[options.id] then next(scenes[options.id]) }
 
+    Q.util.extend @, new Modules options.Modules
+
+
 
     # draw game
     @draw = (viewport) ->
-      for sceneId, scene of @_.scenes
-        scene.draw?(viewport)
+      if @visible
+        for sceneId, scene of @_.scenes
+          scene.draw?(viewport)

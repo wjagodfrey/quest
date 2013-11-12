@@ -5,28 +5,26 @@
 class Q._.modules.Module_Entity
   constructor: (options) ->
 
-    Q.util.extend @, new Modules options.Modules
-
-    defaults =
-      id: undefined
-
-    options = Q.util.extend defaults, options
-
     if options.id?
       @_ =
         type: 'entity'
-        entities: {}
         sysId: Q._.entityCount++
       @id = options.id
       @game = options.game
       @scene = options.scene
       @layer = options.layer
       @color = options.color
+      @collision = Q.util.collision()
+      
+    Q.util.extend @, new Modules options.Modules
 
     # draw entity
     @draw = (viewport) ->
-      Q.physics.apply @layer._.entities[@id]
-      @scene.quadtree.updateEntity @layer._.entities[@id]
-      Q.hits.apply @
-      viewport.context.fillStyle = @color
-      viewport.context.fillRect @pos.x, @pos.y, @width, @height
+      @.fireEvent 'frame', @
+      if !@game.paused and !@scene.paused and !@layer.paused and !@paused
+        @scene.quadtree.updateEntity @layer._.entities[@id]
+        Q.hits.apply @
+
+      if @visible
+        viewport?.context.fillStyle = @color
+        viewport?.context.fillRect @pos.x, @pos.y, @width, @height

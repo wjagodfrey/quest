@@ -18,11 +18,30 @@ scope = Q.hits = {}
         if _entity.id isnt entity.id
           [bl, bt, bw, bh] = [_entity.pos.x, _entity.pos.y, _entity.width, _entity.height]
           collision = Q.util.collision(al, at, aw, ah, bl, bt, bw, bh)
+          entity.collision = collision
+
+          # fire collision events
+          e =
+            entities:
+              this: entity
+              other: _entity
+            collision: collision
+          
           if collision.collision
-            # collision has occurred
-            entity.fireEvent 'collision',
-              entity: _entity
-              collision: collision
+            entity.fireEvent 'collision', e
+          if collision.x
+            entity.fireEvent 'xCollision', e
+          if collision.y
+            entity.fireEvent 'yCollision', e
+          if collision.bottom
+            entity.fireEvent 'bottomCollision', e
+          if collision.top
+            entity.fireEvent 'topCollision', e
+          if collision.left
+            entity.fireEvent 'leftCollision', e
+          if collision.right
+            entity.fireEvent 'rightCollision', e
+          
       # check node tree that object fits inside of
       coords = [[0,0],[0.5,0],[0.5,0.5],[0,0.5]]
       i = coords.length

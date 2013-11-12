@@ -3,89 +3,137 @@
   This file is where we use quest to create things to make sure that they are working.
 ###
 
-box = {}
+root = this ? {}
 
-Q.viewport.create
-  id: 'gameCanvas'
-  width: 200
-  height: 100
-  # color: '#75c2c2'
-.then (viewport) ->
-  # console.log 'CREATED VIEWPORT>>', viewport
-  Q.game.create
-    id: 'techDemo01'
-    width: viewport.width
-    height: viewport.height
-  .then (game) ->
-    # console.log 'CREATED GAME>>', game
-    game.scene.create
-      id: 'firstScene'
-    .then (scene) ->
-      # console.log 'CREATED SCENE>>', scene
-      scene.layer.create
-        id: 'firstLayer'
-      .then (layer) ->
-        # console.log 'CREATED LAYER>>', layer
-        layer.entity.create
-          id: 'firstEntity'
-          width: 10
-          height: 10
-          x: viewport.width/2-5
-          y: viewport.height/2-5
-          color: '#000'
-          Modules:
-            Velocity:
-              speed: 1
-            Keypress:
-              38: # up
-                press: -> box.vel.y -= box.speed
-                release: -> box.vel.y += box.speed
-              40: # down
-                press: -> box.vel.y += box.speed
-                release: -> box.vel.y -= box.speed
-              37: # left
-                press: -> box.vel.x -= box.speed
-                release: -> box.vel.x += box.speed
-              39: # right
-                press: -> box.vel.x += box.speed
-                release: -> box.vel.x -= box.speed
-        .then (entity) ->
-          entity.registerEvent 'collision', (e) ->
+root.box = box = {}
 
-            console.log e
+Q = window?.Q ? require?('./quest')
 
-          box = entity
-          viewport.bind(game).then ->
-            Q._.filesys.viewports.gameCanvas.draw
+move = (axis, dir) ->
+  if not box.dir[axis][dir]
+    box.dir[axis][dir] = true
+    vel = {}
+    vel[axis] = box.speed * dir
+    Q.physics.addVelocity box, 'movement', vel
+stop = (axis, dir) ->
+  if box.dir[axis][dir]
+    box.dir[axis][dir] = false
+    vel = {}
+    vel[axis] = box.speed * dir
+    Q.physics.removeVelocity box, 'movement', vel
 
-        layer.entity.create
-          id: 'secondEntity'
-          width: 10
-          height: 10
-          x: 50
-          y: 25
-          color: '#ff0000'
+if not Q.onServer
 
-        layer.entity.create
-          id: 'thirdEntity'
-          width: 10
-          height: 10
-          x: 60
-          y: 15
-          color: '#00ff00'
+  Q.viewport.create
+    id: 'gameCanvas'
+    width: 200
+    height: 100
+    color: '#d33d47'
+  .then (viewport) ->
+    Q.game.create
+      id: 'techDemo01'
+      width: viewport.width
+      height: viewport.height
+    .then (game) ->
+      game.scene.create
+        id: 'firstScene'
+      .then (scene) ->
+        scene.layer.create
+          id: 'firstLayer'
+        .then (layer) ->
+          layer.entity.create
+            id: 'firstEntity'
+            width: 10
+            height: 10
+            x: 110
+            y: 40
+            color: '#000'
+            Modules:
+              Properties:
+                dir:
+                  x:
+                    "-1": false
+                    "1": false
+                  y:
+                    "-1": false
+                    "1": false
+              Gravity: true
+              BoxCollision: true
+              Velocity:
+                speed: 1
+              Keypress:
+                # Y
+                38: # up
+                  press: ->
+                    box.dir.y["-1"] = true
+                  release: ->
+                    box.dir.y["-1"] = false
+                    # console.log box
+                    # if box._.velocities.jump?.y is 0
+                    #   Q.physics.addVelocity box, 'jump', {y: -box.speed*1.5}
+                40: # down
+                  press: -> move 'y', 1
+                  release: -> stop 'y', 1
 
-        layer.entity.create
-          id: 'fourthEntity'
-          width: 10
-          height: 10
-          x: 75
-          y: 40
-          color: '#0000ff'
+                # X
+                37: # left
+                  press: -> move 'x', -1
+                  release: -> stop 'x', -1
+                39: # right
+                  press: -> move 'x', 1
+                  release: -> stop 'x', 1
+          .then (entity) ->
+            box = entity
 
-        layer.entity.create
-          id: 'fifthEntity'
-          width: 10
-          height: 10
-          x: 145
-          y: 75
-          color: '#ffff00'
+            viewport.bind(game)
+
+            # box.bindEvent 'frame', (e) ->
+            #   box.dir.y["-1"] = false
+
+            box.bindEvent 'yCollision', (e) ->
+                Q.physics.removeVelocity box, 'jump', {y: true}
+                if e.collision.bottom and box.dir.y["-1"]
+                  Q.physics.addVelocity box, 'jump', {y: -box.speed*1.5}
+              # if box.vel.y > 0 and e.collision.bottom
+                # box.grounded = true
+
+          layer.entity.create
+            id: 'secondEntity'
+            width: 21
+            height: 10
+            x: 50
+            y: 25
+            color: '#515151'
+
+          layer.entity.create
+            id: 'thirdEntity'
+            width: 10
+            height: 10
+            x: 60
+            y: 15
+            color: '#6e6e6e'
+
+          layer.entity.create
+            id: 'fourthEntity'
+            width: 10
+            height: 10
+            x: 75
+            y: 40
+            color: '#848484'
+
+          layer.entity.create
+            id: 'fifthEntity'
+            width: 100
+            height: 10
+            x: 25
+            y: 75
+            color: '#adadad'
+
+          layer.entity.create
+            id: 'sixthEntity'
+            width: 10
+            height: 10
+            x: 90
+            y: 50
+            color: '#eaeaea'
+

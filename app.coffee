@@ -3,6 +3,10 @@ express   = require 'express'
 stylus    = require 'stylus'
 nib       = require 'nib'
 routes    = require './config/routes'
+Q         = require './public/javascripts/quest'
+G         = require './public/javascripts/game'
+
+console.log Q
 
 env       = process.env.NODE_ENV
 port      = if env is 'production' then 80 else 8000

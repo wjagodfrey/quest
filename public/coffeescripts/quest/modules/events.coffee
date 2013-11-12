@@ -5,20 +5,21 @@
 class Q._.modules.Module_Events
   constructor: () ->
 
-    @_ =
-      events: {}
+    if not @_?.events?
+      @_ =
+        events: {}
 
+    # handle event firing
     @fireEvent = (type, args...) ->
-      if @_.events['collision']?
-        for handler in @_.events['collision'] then do (handler) ->
+      if @_.events[type]?
+        for handler in @_.events[type] then do (handler) =>
           handler args...
 
-    @registerEvent = (type, handler) ->
+    @bindEvent = (type, handler) ->
       if not @_.events[type] then @_.events[type] = []
       @_.events[type].push handler
-      console.log "registered a new event #{type}", @
 
-    @unregisterEvent = (type, handler) ->
+    @unbindEvent = (type, handler) ->
       if @_.events[type]?
         if handler in @_.events[type]
           console.log "removing handler of type #{type}"

@@ -38,5 +38,6 @@ class Q._.modules.Module_Scene
 
     # draw scene
     @draw = (viewport) ->
-      for layerId, layer of @_.layers
-        layer.draw?(viewport)
+      if @visible
+        for layerId, layer of @_.layers
+          layer.draw?(viewport)

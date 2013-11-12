@@ -5,8 +5,6 @@
 class Q._.modules.Module_Layer
   constructor: (options) ->
 
-    Q.util.extend @, new Modules options.Modules
-
     defaults =
       id: undefined
 
@@ -33,13 +31,16 @@ class Q._.modules.Module_Layer
           options.height = options.height ? options.layer.height
 
           modules =
-            Entity: options
             Display: options
-            Events: true
+            Events: options
+            Entity: options
           entities[options.id] = new Modules modules
         { then: (next) -> if entities[options.id] then next(entities[options.id]) }
 
+    Q.util.extend @, new Modules options.Modules
+
     # draw layer
     @draw = (viewport) ->
-      for entityId, entity of @_.entities
-        entity.draw?(viewport)
+      if @visible
+        for entityId, entity of @_.entities
+          entity.draw?(viewport)

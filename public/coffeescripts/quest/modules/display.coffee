@@ -1,5 +1,5 @@
 ###
-  Dimensions Module
+  Display Module
 ###
 
 class Q._.modules.Module_Display

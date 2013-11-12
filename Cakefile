@@ -15,7 +15,7 @@ task 'watch:quest', 'Run a coffeescript compile watch on the Quest coffee files'
 
     # module files
     "#{pref}modules/modules.coffee"
-    "#{pref}modules/unique.coffee"
+    "#{pref}modules/properties.coffee"
     "#{pref}modules/display.coffee"
     "#{pref}modules/velocity.coffee"
     "#{pref}modules/keypress.coffee"
@@ -25,6 +25,8 @@ task 'watch:quest', 'Run a coffeescript compile watch on the Quest coffee files'
     "#{pref}modules/layer.coffee"
     "#{pref}modules/entity.coffee"
     "#{pref}modules/quadtree.coffee"
+    "#{pref}modules/gravity.coffee"
+    "#{pref}modules/box_collision.coffee"
     "#{pref}modules/events.coffee"
 
     # quest application files
@@ -50,11 +52,17 @@ task 'watch:quest', 'Run a coffeescript compile watch on the Quest coffee files'
 ###
 
 task 'watch:game', 'Run a coffeescript compile watch on the Quest coffee files', ->
-  console.log 'Compiling Game Coffeescript'
   pref = 'public/coffeescripts/game/'
-  files = "
-            #{pref}game.coffee
-          "
-  exec " coffee -w -j public/javascripts/game.js -c " + files, (err, stdout, stderr) ->
+  files = [
+
+    # game files
+    "#{pref}game.coffee"
+
+  ].join(' ')
+
+  console.log '\nCompiling files to game.js:\n', files.split(' ').join('\n ')+'\n'
+
+  questTask = exec " coffee -w -j public/javascripts/game.js -c #{files}", (err, stdout, stderr) ->
     throw err if err
     console.log stdout + stderr
+  questTask.stdout.on 'data', (data) -> console.log data
