@@ -16,8 +16,10 @@ class Q._.modules.Module_Scene
       @_ =
         type: 'scene'
         layers: {}
+        elementIndex: options.elementIndex
       @id = options.id
       @game = options.game
+
 
     # add scenes
     @layer =
@@ -26,6 +28,7 @@ class Q._.modules.Module_Scene
           layers = @_.layers
           layers[options.id] = {}
           options.game = Q._.filesys.games[@game.id]
+          options.elementIndex ?= @game.newElementIndex()
           options.scene = @game._.scenes[@id]
           options.width = options.width ? options.scene.width
           options.height = options.height ? options.scene.height
@@ -33,11 +36,11 @@ class Q._.modules.Module_Scene
           modules =
             Layer: options
             Display: options
-          layers[options.id] = new Modules modules
+          @game._.elements[options.elementIndex] = layers[options.id] = new Modules modules
         { then: (next) -> if layers[options.id] then next(layers[options.id]) }
 
     # draw scene
     @draw = (viewport) ->
-      if @visible
+      if !@hidden
         for layerId, layer of @_.layers
           layer.draw?(viewport)

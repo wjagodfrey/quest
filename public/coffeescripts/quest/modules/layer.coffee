@@ -14,6 +14,7 @@ class Q._.modules.Module_Layer
       @_ =
         type: 'layer'
         entities: {}
+        elementIndex: options.elementIndex
       @id = options.id
       @game = options.game
       @scene = options.scene
@@ -25,6 +26,7 @@ class Q._.modules.Module_Layer
           entities = @_.entities
           entities[options.id] = {}
           options.game = @game
+          options.elementIndex ?= @game.newElementIndex()
           options.scene = @scene
           options.layer = @scene._.layers[@id]
           options.width = options.width ? options.layer.width
@@ -34,13 +36,13 @@ class Q._.modules.Module_Layer
             Display: options
             Events: options
             Entity: options
-          entities[options.id] = new Modules modules
+          @game._.elements[options.elementIndex] = entities[options.id] = new Modules modules
         { then: (next) -> if entities[options.id] then next(entities[options.id]) }
 
     Q.util.extend @, new Modules options.Modules
 
     # draw layer
     @draw = (viewport) ->
-      if @visible
+      if !@hidden
         for entityId, entity of @_.entities
           entity.draw?(viewport)

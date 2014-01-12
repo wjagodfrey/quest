@@ -77,6 +77,5 @@ Q.util.collision = (al=0, at=0, aw=0, ah=0, bl=0, bt=0, bw=0, bh=0) ->
       if result.direction.x > 0
         result.right = true
 
-
   # return evaluation
   result

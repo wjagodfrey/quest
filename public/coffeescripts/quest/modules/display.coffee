@@ -4,7 +4,7 @@
 
 class Q._.modules.Module_Display
   constructor: (options) ->
-    @.visible   = options.visible ? true
+    @.hidden   = options.hidden ? false
     @.paused    = options.paused ? false
     @.width     = options.width ? undefined
     @.height    = options.height ? undefined

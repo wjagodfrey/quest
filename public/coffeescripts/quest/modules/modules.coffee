@@ -10,4 +10,3 @@ class Modules
         Q.util.extend @, mod
       else
         console.error "#{moduleName} does not exist"
-    # console.log "RESULT>>", @

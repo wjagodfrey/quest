@@ -13,8 +13,19 @@ task 'watch:quest', 'Run a coffeescript compile watch on the Quest coffee files'
     "#{pref}quest.coffee"
     "#{pref}util.coffee"
 
+    # quest application files
+    "#{pref}functions/sockets.coffee"
+    "#{pref}functions/viewports.coffee"
+    "#{pref}functions/games.coffee"
+    "#{pref}functions/events.coffee"
+    "#{pref}functions/loop.coffee"
+    "#{pref}functions/physics.coffee"
+    "#{pref}functions/collisions.coffee"
+    "#{pref}functions/connections.coffee"
+    
     # module files
     "#{pref}modules/modules.coffee"
+    "#{pref}modules/game_elements.coffee"
     "#{pref}modules/properties.coffee"
     "#{pref}modules/display.coffee"
     "#{pref}modules/velocity.coffee"
@@ -26,16 +37,12 @@ task 'watch:quest', 'Run a coffeescript compile watch on the Quest coffee files'
     "#{pref}modules/entity.coffee"
     "#{pref}modules/quadtree.coffee"
     "#{pref}modules/gravity.coffee"
-    "#{pref}modules/box_collision.coffee"
+    "#{pref}modules/collision_correction.coffee"
+    "#{pref}modules/inputs.coffee"
     "#{pref}modules/events.coffee"
+    "#{pref}modules/connection.coffee"
+    "#{pref}modules/sync.coffee"
 
-    # quest application files
-    "#{pref}functions/viewports.coffee"
-    "#{pref}functions/games.coffee"
-    "#{pref}functions/events.coffee"
-    "#{pref}functions/loop.coffee"
-    "#{pref}functions/physics.coffee"
-    "#{pref}functions/hits.coffee"
 
   ].join(' ')
 

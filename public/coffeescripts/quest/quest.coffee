@@ -28,7 +28,7 @@
 ###
 
 if !Q? then Q = {}
-window = this ? {}
+window = @ ? {}
 
 if module?.exports?
   module.exports = Q
@@ -37,11 +37,19 @@ else
   window.Q = Q
   Q.onServer = false
 
+# config
+Q.config =
+  # websocket config
+  port: '8030'
+  serverAddress: 'localhost'
+  reconnectTime: 2000
+
 # system objects
 Q._ =
   # the complete file structure is contained in here
-  entityCount: 0
+  socketQueue: []
   filesys :
+    connections: {}
     viewports: {}
     games: {}
   # element modules are stored in here

@@ -16,4 +16,3 @@ class Q._.modules.Module_Velocity
     @.vel =
       x:        options.velx ? 0
       y:        options.vely ? 0
-    @.speed =   options.speed ? 0
